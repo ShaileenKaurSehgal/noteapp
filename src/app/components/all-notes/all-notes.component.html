@@ -1,0 +1,36 @@
+<div *ngIf="!showAddNote">
+    <div class="searchArea">
+        <span class="p-input-icon-right">
+            <i class="pi pi-times" (click)="clearSearch()"></i>
+            <input type="text" pInputText [(ngModel)]="searchTitle" class="p-inputtext-sm inputSearch"
+                placeholder="Search Note" [disabled]="!showList" (input)="titleSearch(searchTitle)" />
+
+        </span>
+        <i class="pi pi-plus plusIcon" (click)="addNote()"></i>
+    </div>
+    <div class="noNotesToShow" *ngIf="showNoData">
+        <i class="pi pi-plus plusIcon" (click)="addNote()"></i>
+        <h3>No notes to show</h3>
+        <p>Notes added will be shown here</p>
+    </div>
+
+    <div *ngIf="showList" class="allNotes">
+        <div *ngFor="let note of addedNotes;let index =index" class="noteCard">
+            <p-card header="{{note.title}}">
+                <ng-template pTemplate="header">
+                    <i class="pi pi-trash" style="float: right;margin: 10px;" (click)="deleteNote(index)"></i>
+                    <i class="pi pi-pencil" style="float: right;margin: 10px;" (click)="editNote(index)"></i>
+                </ng-template>
+
+                <p class="m-0">
+                    {{note.desc}}
+                </p>
+            </p-card>
+
+        </div>
+
+    </div>
+</div>
+
+<app-add-note *ngIf="showAddNote" [showAddNoteValue]="showAddNote" (showAddNotChildValue)="getChildAddNoteValue($event)" [dataToEdit]="dataToEdit"
+    (allNotesAdded)="getAllData($event)"></app-add-note>

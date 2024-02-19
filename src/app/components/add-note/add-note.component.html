@@ -1,0 +1,5 @@
+<div class="chatArea" >
+    <textarea pInputTextarea class="addNoteTextArea" [(ngModel)]="noteText" ></textarea>
+    <p-button class="cancelButton" severity="secondary" [rounded]="true"  icon="pi pi-times" (click)="cancel()"></p-button>
+    <p-button class="addButton" icon="pi pi-check" [rounded]="true" (click)="getAddedNote(noteText)" ></p-button>
+</div>
